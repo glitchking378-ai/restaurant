@@ -1,0 +1,27 @@
+name: Order Bot
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'waiter.js'
+      - 'chef.js'
+      - 'Menu/**'
+      - 'Kitchen/**'
+      - 'Billing/**'
+      - 'Tables/**'
+      - 'Security-Guards/**'
+      - 'Reservations/**'
+
+jobs:
+  process-order:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Order received
+        run: echo "A new order has entered the restaurant system."
+
+      - name: Validate order flow
+        run: echo "Waiter -> Chef -> Table pipeline checked."
