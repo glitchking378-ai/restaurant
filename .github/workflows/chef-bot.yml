@@ -1,0 +1,16 @@
+name: Chef Bot
+
+on:
+  workflow_dispatch:
+
+jobs:
+  chef:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Chef online
+        run: echo "Chef is in the kitchen."
+
+      - name: Cooking simulation
+        run: echo "Preparing food..."
