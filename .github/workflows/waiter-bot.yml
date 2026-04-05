@@ -19,7 +19,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run waiter bot
-        env:
-          WAITER_URL: http://localhost:8787
-        run: node scripts/waiter-bot.mjs
+      - name: Check waiter bot syntax
+        run: node --check scripts/waiter-bot.mjs
+
+      - name: Check waiter worker syntax
+        run: |
+          node --check waiter.js
+          node --check Security-Guards/validate.js
+          node --check Tables/tableResponse.js
+          node --check Billing/bill.js

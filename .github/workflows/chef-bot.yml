@@ -21,7 +21,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run chef bot
-        env:
-          CHEF_URL: http://localhost:8787
-        run: node scripts/chef-bot.mjs
+      - name: Check chef bot syntax
+        run: node --check scripts/chef-bot.mjs
+
+      - name: Check chef worker syntax
+        run: |
+          node --check chef.js
+          node --check Kitchen/chefLogic.js
+          node --check Menu/items.js

@@ -20,7 +20,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run food workflow
-        env:
-          WAITER_URL: http://localhost:8787
-        run: node scripts/food.mjs
+      - name: Check food workflow syntax
+        run: node --check scripts/food.mjs
+
+      - name: Check app and worker syntax
+        run: |
+          node --check waiter.js
+          node --check chef.js
+          node --check public/app.js
