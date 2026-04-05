@@ -1,0 +1,25 @@
+name: Waiter Bot
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'waiter.js'
+      - 'scripts/waiter-bot.mjs'
+      - 'package.json'
+
+jobs:
+  waiter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run waiter bot
+        env:
+          WAITER_URL: http://localhost:8787
+        run: node scripts/waiter-bot.mjs

@@ -1,0 +1,12 @@
+{
+  "name": "restaurant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "order-bot": "node scripts/order-bot.mjs",
+    "waiter-bot": "node scripts/waiter-bot.mjs",
+    "chef-bot": "node scripts/chef-bot.mjs",
+    "food": "node scripts/food.mjs"
+  }
+}

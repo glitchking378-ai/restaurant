@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "waiter",
+  "main": "waiter.js",
+  "compatibility_date": "2026-04-04",
+  "services": [
+    {
+      "binding": "CHEF",
+      "service": "chef"
+    }
+  ]
+}
