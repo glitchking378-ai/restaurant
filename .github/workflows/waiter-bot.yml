@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - 'waiter.js'
+      - 'scripts/waiter-bot.mjs'
+      - 'package.json'
 
 jobs:
   waiter:
@@ -12,8 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Waiter online
-        run: echo "Waiter is ready to take orders."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Serve greeting
-        run: echo "Welcome to our restaurant!"
+      - name: Run waiter bot
+        env:
+          WAITER_URL: http://localhost:8787
+        run: node scripts/waiter-bot.mjs

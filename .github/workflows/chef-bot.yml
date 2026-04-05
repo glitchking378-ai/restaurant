@@ -2,6 +2,13 @@ name: Chef Bot
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'chef.js'
+      - 'Kitchen/**'
+      - 'Menu/**'
+      - 'scripts/chef-bot.mjs'
+      - 'package.json'
 
 jobs:
   chef:
@@ -9,8 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Chef online
-        run: echo "Chef is in the kitchen."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Cooking simulation
-        run: echo "Preparing food..."
+      - name: Run chef bot
+        env:
+          CHEF_URL: http://localhost:8787
+        run: node scripts/chef-bot.mjs

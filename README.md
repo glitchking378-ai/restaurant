@@ -34,6 +34,9 @@ This project simulates a restaurant using Cloudflare Workers.
 - Security-Guards/
 - Billing/
 - Reservations/
+- public/
+- scripts/
+- .github/workflows/
 
 ---
 

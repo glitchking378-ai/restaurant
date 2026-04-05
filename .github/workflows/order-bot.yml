@@ -12,6 +12,8 @@ on:
       - 'Tables/**'
       - 'Security-Guards/**'
       - 'Reservations/**'
+      - 'scripts/order-bot.mjs'
+      - 'package.json'
 
 jobs:
   process-order:
@@ -20,8 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Order received
-        run: echo "A new order has entered the restaurant system."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Validate order flow
-        run: echo "Waiter -> Chef -> Table pipeline checked."
+      - name: Run order bot
+        env:
+          WAITER_URL: http://localhost:8787
+        run: node scripts/order-bot.mjs

@@ -2,6 +2,12 @@ name: Food System
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'waiter.js'
+      - 'chef.js'
+      - 'scripts/food.mjs'
+      - 'package.json'
 
 jobs:
   food:
@@ -9,8 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Food pipeline
-        run: echo "Food is being processed through the system."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Serve food
-        run: echo "Order served to table."
+      - name: Run food workflow
+        env:
+          WAITER_URL: http://localhost:8787
+        run: node scripts/food.mjs
