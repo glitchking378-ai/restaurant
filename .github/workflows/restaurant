@@ -1,0 +1,50 @@
+name: Restaurant CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  waiter-check:
+    name: Waiter Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node --check waiter.js
+      - run: node --check scripts/waiter-bot.mjs
+
+  chef-check:
+    name: Chef Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node --check chef.js
+      - run: node --check Kitchen/chefLogic.js
+      - run: node --check scripts/chef-bot.mjs
+
+  food-check:
+    name: Food Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node --check scripts/food.mjs
+
+  order-check:
+    name: Order Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node --check scripts/order-bot.mjs
+      - run: node --check Menu/items.js
