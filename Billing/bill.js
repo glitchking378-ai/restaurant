@@ -6,9 +6,13 @@ export function calculateTotal(item) {
 }
 
 export function bill(item, price) {
+  const total = typeof price === "number" && Number.isFinite(price) && price >= 0
+    ? price
+    : calculateTotal(item);
+
   return {
     item,
-    total: typeof price === "number" ? price : calculateTotal(item),
+    total,
     currency: "VTC",
     status: "charged",
     message: "Your table has been charged."
