@@ -29,8 +29,21 @@ export default {
         });
       }
 
-      const res = await env.CHEF.fetch("https://chef.internal/cook?item=" + encodeURIComponent(item));
-      const data = await res.json();
+      let res;
+      let data;
+      try {
+        res = await env.CHEF.fetch("https://chef.internal/cook?item=" + encodeURIComponent(item));
+        data = await res.json();
+      } catch {
+        return new Response(JSON.stringify(serveToTable({
+          ok: false,
+          status: 502,
+          error: "The kitchen is temporarily unreachable."
+        }), null, 2), {
+          status: 502,
+          headers: { "content-type": "application/json; charset=UTF-8" }
+        });
+      }
 
       if (!res.ok) {
         return new Response(JSON.stringify(serveToTable({ ok: false, status: res.status, error: data.error || "The kitchen rejected the order." }), null, 2), {
